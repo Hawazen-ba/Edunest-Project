@@ -4,15 +4,17 @@ import Fonts from "../../assets/styles/fonts";
 import { TouchableWithoutFeedback } from "react-native";
 import useAuthStore from "../../utils/AuthStore";
 import useColors from "../../assets/styles/colors";
+import useOnBoardingStore from "../../utils/OnBoardingStore";
 
 const { width, height } = Dimensions.get("window");
 
 const OnboardingScreen = ({ navigation }) => {
   const Colors = useColors();
   const { isLoggedIn } = useAuthStore();
+  const { completeOnboarding } = useOnBoardingStore();
   const handleOnboardingComplete = async () => {
-    // isLoggedIn ? navigation.navigate("Home") :
-    navigation.navigate("Unauthorized");
+    await completeOnboarding();
+    navigation.replace("Unauthorized");
   };
   const dismissKeyboard = () => {
     Keyboard.dismiss();

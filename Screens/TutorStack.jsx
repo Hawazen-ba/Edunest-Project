@@ -14,6 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddOnlineClassScreen from "./Tutor/AddOnlineClassScreen";
 import FinancialScreen from "./Tutor/FinancialScreen";
 import FinancialInfoScreen from "./Tutor/FinancialInfoScreen";
+import SubContactScreen from "./Main/SubContactScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -142,6 +143,11 @@ const TutorStack = () => {
       <Stack.Screen
         name="FinancialInfo"
         component={FinancialInfoScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SubContact"
+        component={SubContactScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

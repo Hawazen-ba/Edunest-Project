@@ -9,13 +9,13 @@ const ContactScreen = ({ route }) => {
 
   const roleBasedContacts = {
     student: [
-      { title: "Administration", icon: "school-outline", screen: "SubContact" },
-      { title: "Teachers", icon: "people", screen: "SubContact" },
+      { title: "Administration", icon: "school-outline" },
+      { title: "Teachers", icon: "people" },
     ],
 
     teacher: [
-      { title: "Administration", icon: "school-outline", screen: "SubContact" },
-      { title: "Parents", icon: "people-outline", screen: "SubContact" },
+      { title: "Administration", icon: "school-outline" },
+      { title: "Parents", icon: "people-outline" },
     ],
   };
 

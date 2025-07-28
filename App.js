@@ -7,7 +7,7 @@ import useOnBoardingStore from "./utils/OnBoardingStore";
 import OnboardingScreen from "./Screens/Authentication/OnBoardingScreen";
 import SubContactScreen from "./Screens/Main/SubContactScreen";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import TutorStack from "./Screens/TutorStack";
 
 const Stack = createNativeStackNavigator();
@@ -15,31 +15,28 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const { isFirstLaunched, checkFirstLaunch } = useOnBoardingStore();
   const { user, isLoggedIn } = useAuthStore();
-  console.log(user);
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    checkFirstLaunch();
+  }, []);
+
+  if (isFirstLaunched === null) {
+    // Still loading onboarding state
+    return null; // Or a splash/loading component
+  }
+
   return (
     <NavigationContainer>
-      {!isLoggedIn ? (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Authorized"
-            component={TutorStack}
-            // component={user?.role === "teacher" ? TutorStack : GeneralStack}
-            options={{ headerShown: false }}
-          />
+      {isFirstLaunched ? (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        </Stack.Navigator>
+      ) : !isLoggedIn ? (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Unauthorized" component={UnauthorizedStack} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {!isFirstLaunched && (
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-          )}
-          <Stack.Screen
-            name="Unauthorized"
-            component={UnauthorizedStack}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name="Authorized" component={TutorStack} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
