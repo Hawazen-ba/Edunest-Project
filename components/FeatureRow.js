@@ -1,8 +1,14 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View, Dimensions } from "react-native";
+import { FlatList, StyleSheet, View, Dimensions } from "react-native";
 import FeatureCard from "./FeatureCard";
 
-const FeatureRow = ({ data, column }) => {
+const { width } = Dimensions.get("window");
+
+const FeatureRow = ({ data, column = 3, columnWrapperStyle }) => {
+  // Calculate card width based on columns and margin
+  const totalMargin = 16 * column; // 8px margin on each side per card
+  const cardWidth = (width - totalMargin - 20) / column; // 20 for container padding
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -12,11 +18,16 @@ const FeatureRow = ({ data, column }) => {
             title={item.title}
             icon={item.icon}
             screen={item.screen}
+            cardWidth={cardWidth}
           />
         )}
         numColumns={column}
         contentContainerStyle={styles.list}
+        columnWrapperStyle={
+          columnWrapperStyle || { justifyContent: "flex-start" }
+        }
         scrollEnabled={false}
+        keyExtractor={(item, idx) => item.title + idx}
       />
     </View>
   );
@@ -28,7 +39,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   list: {
-    justifyContent: "space-between",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    paddingHorizontal: 10,
   },
 });
 

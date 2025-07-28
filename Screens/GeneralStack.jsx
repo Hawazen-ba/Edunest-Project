@@ -143,11 +143,7 @@ const AuthorizedStack = () => {
         component={ProfileScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="SubContact"
         component={SubContactScreen}

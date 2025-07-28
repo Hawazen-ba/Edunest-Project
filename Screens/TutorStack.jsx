@@ -15,6 +15,10 @@ import AddOnlineClassScreen from "./Tutor/AddOnlineClassScreen";
 import FinancialScreen from "./Tutor/FinancialScreen";
 import FinancialInfoScreen from "./Tutor/FinancialInfoScreen";
 import SubContactScreen from "./Main/SubContactScreen";
+import SuggestionDetailClubs from "./Main/SuggestionDetailClubs";
+import SuggestionDetailInfrastructure from "./Main/SuggestionDetailInfrastructure";
+import SuggestionDetailEducation from "./Main/SuggestionDetailEducation";
+import SuggestionDetailAdministration from "./Main/SuggestionDetailAdministration";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -148,6 +152,26 @@ const TutorStack = () => {
       <Stack.Screen
         name="SubContact"
         component={SubContactScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SuggestionDetailAdministration"
+        component={SuggestionDetailAdministration}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SuggestionDetailEducation"
+        component={SuggestionDetailEducation}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SuggestionDetailInfrastructure"
+        component={SuggestionDetailInfrastructure}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SuggestionDetailClubs"
+        component={SuggestionDetailClubs}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

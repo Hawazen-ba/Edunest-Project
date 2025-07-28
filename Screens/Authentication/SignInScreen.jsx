@@ -19,6 +19,7 @@ import Button from "../../components/Button";
 import usePasswordStore from "../../utils/PasswordStore";
 import { useNavigation } from "@react-navigation/native";
 import useColors from "../../assets/styles/colors";
+import useAuthStore from "../../utils/AuthStore";
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
@@ -33,12 +34,13 @@ const validation = Yup.object({
 
 const SignInScreen = () => {
   const Colors = useColors();
-  const navigation = useNavigation();
   const { showPassword, togglePassword } = usePasswordStore();
+  const { loggedIn } = useAuthStore();
+  const navigation = useNavigation();
 
   const handleSignIn = (values) => {
-    console.log("Sign In pressed", values);
-    navigation.navigate("Home", values);
+    console.log("Sign In pressed");
+    loggedIn({ phoneNumber: values.phoneNumber, role: "student" });
   };
 
   const handleForgotPassword = () => {

@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 
 const useOnBoardingStore = create((set) => ({
-  isFirstLaunched: null, // null = loading, true = first launch, false = not first launch
+  isFirstLaunched: null,
   checkFirstLaunch: async () => {
     const value = await AsyncStorage.getItem("alreadyLaunched");
     if (value === null) {

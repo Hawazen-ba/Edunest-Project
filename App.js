@@ -20,8 +20,7 @@ const App = () => {
   }, []);
 
   if (isFirstLaunched === null) {
-    // Still loading onboarding state
-    return null; // Or a splash/loading component
+    return null;
   }
 
   return (

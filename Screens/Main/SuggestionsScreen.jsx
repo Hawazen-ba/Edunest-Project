@@ -50,13 +50,7 @@ const SuggestionsScreen = () => {
       justifyContent: "center",
       alignItems: "center",
     },
-    content: {
-      backgroundColor: "#fff",
-      borderRadius: 16,
-      padding: 28,
-      width: "85%",
-      alignItems: "center",
-    },
+
     title: {
       fontSize: 20,
       fontWeight: "bold",
@@ -69,6 +63,13 @@ const SuggestionsScreen = () => {
       color: Colors.primary,
       marginBottom: 20,
       textAlign: "left",
+    },
+    content: {
+      backgroundColor: "#fff",
+      borderRadius: 16,
+      padding: 28,
+      width: "85%",
+      alignItems: "center",
     },
     closeBtn: {
       backgroundColor: Colors.primary,
@@ -91,24 +92,23 @@ const SuggestionsScreen = () => {
         style={{
           flex: 1,
           alignContent: "center",
-          alignSelf: "center",
           marginBottom: 107,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View style={{ marginRight: -20, marginLeft: 20 }}>
-          <FeatureRow data={features} column={2} />
+        <FeatureRow data={features} column={2} />
+        <View style={{ alignItems: "center" }}>
+          <InfoCard
+            icon={"information-circle-outline"}
+            title={"Instructions"}
+            onPress={() => setShowInstructions(true)}
+          />
+          <InfoCard
+            icon={"help-circle-outline"}
+            title={"More infos"}
+            onPress={() => setShowMoreInfo(true)}
+          />
         </View>
-        <InfoCard
-          icon={"information-circle-outline"}
-          title={"Instructions"}
-          onPress={() => setShowInstructions(true)}
-        />
-        <InfoCard
-          icon={"help-circle-outline"}
-          title={"More infos"}
-          onPress={() => setShowMoreInfo(true)}
-        />
       </ScrollView>
       <Modal
         visible={showInstructions}

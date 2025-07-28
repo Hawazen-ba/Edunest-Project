@@ -11,13 +11,10 @@ import { useNavigation } from "@react-navigation/native";
 import useColors from "../assets/styles/colors";
 
 const { width, height } = Dimensions.get("window");
-const FeatureCard = ({ icon, title, screen }) => {
+const FeatureCard = ({ icon, title, screen, cardWidth }) => {
   const navigation = useNavigation();
   const Colors = useColors();
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-    },
     card: {
       alignItems: "center",
       flexDirection: "column",
@@ -26,24 +23,28 @@ const FeatureCard = ({ icon, title, screen }) => {
       backgroundColor: "white",
       borderWidth: 3,
       borderColor: Colors.primary,
-      width: width * 0.3,
-      height: height * 0.15,
+      width: cardWidth || width * 0.28, // fallback for 3 columns
+      height: height * 0.17, // slightly taller for more space
       marginHorizontal: 8,
+      alignSelf: "center",
+      justifyContent: "center",
+      paddingVertical: 10, // add vertical padding
     },
     iconContainer: {
-      width: width * 0.157,
-      height: height * 0.07,
-      marginBottom: 20,
-      marginTop: 20,
-      marginLeft: 8,
+      width: (cardWidth || width * 0.28) * 0.7, // increase width
+      height: height * 0.09, // increase height
+      marginBottom: 10, // reduce margin
+      marginTop: 10, // reduce margin
+      resizeMode: "contain", // ensure image fits
+      alignSelf: "center",
     },
     textContainer: {
       backgroundColor: Colors.primary,
-
       height: height * 0.04,
-      width: width * 0.3,
+      width: cardWidth || width * 0.28,
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
+      marginTop: 12,
       justifyContent: "center",
       alignItems: "center",
     },
@@ -55,7 +56,6 @@ const FeatureCard = ({ icon, title, screen }) => {
   });
   return (
     <TouchableOpacity
-      style={styles.container}
       onPress={() => {
         navigation.navigate(screen);
       }}

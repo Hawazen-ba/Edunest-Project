@@ -44,8 +44,10 @@ const SignUpScreen = () => {
   const handleSignUp = async (values, { setSubmitting }) => {
     try {
       console.log("Signing up...");
-      console.log(values);
-      navigation.navigate("CompleteProfile");
+      loggedIn({
+        phoneNumber: values.phoneNumber,
+        role: values.role || "student",
+      });
     } catch (error) {
       console.error("Sign up error:", error);
       Alert.alert("Error", "Sign up failed. Please try again.");
