@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import AuthorizedStack from "./Screens/AuthorizedStack";
+import GeneralStack from "./Screens/GeneralStack";
 import UnauthorizedStack from "./Screens/UnauthorizedStack";
 import useAuthStore from "./utils/AuthStore";
 import useOnBoardingStore from "./utils/OnBoardingStore";
@@ -8,6 +8,7 @@ import OnboardingScreen from "./Screens/Authentication/OnBoardingScreen";
 import SubContactScreen from "./Screens/Main/SubContactScreen";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import TutorStack from "./Screens/TutorStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,11 +21,12 @@ const App = () => {
   }, [user]);
   return (
     <NavigationContainer>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <Stack.Navigator>
           <Stack.Screen
             name="Authorized"
-            component={AuthorizedStack}
+            component={TutorStack}
+            // component={user?.role === "teacher" ? TutorStack : GeneralStack}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

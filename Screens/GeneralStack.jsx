@@ -130,6 +130,7 @@ const AuthorizedStack = () => {
       <Stack.Screen
         name="Contact"
         component={ContactScreen}
+        initialParams={{ role: "student" }}
         options={{ headerShown: false }}
       />
       <Stack.Screen

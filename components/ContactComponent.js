@@ -12,10 +12,10 @@ import { useNavigation } from "@react-navigation/native";
 import useColors from "../assets/styles/colors";
 
 const { width, height } = Dimensions.get("window");
-const ContactComponent = ({ icon, title, screen = "" }) => {
+const ContactComponent = ({ icon, title }) => {
   const navigation = useNavigation();
   const handlePress = () => {
-    navigation.navigate(screen, { title: title });
+    navigation.navigate("SubContact", { title: title });
   };
   const Colors = useColors();
   const styles = StyleSheet.create({

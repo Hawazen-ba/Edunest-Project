@@ -5,11 +5,7 @@ import DayButton from "./DayButton";
 const DaySelector = ({ days, selectedIdx, onSelect }) => {
   return (
     <View>
-      <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        style={styles.daySelectorScroll}
-      >
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {days.map((day, idx) => (
           <DayButton
             key={day}

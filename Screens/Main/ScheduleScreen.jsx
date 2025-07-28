@@ -11,6 +11,7 @@ import ChildSelector from "../../components/ChildSelector";
 import GeneralHeader from "../../components/GeneralHeader";
 import DaySelector from "../../components/DaySelector";
 import useColors from "../../assets/styles/colors";
+import useAuthStore from "../../utils/AuthStore";
 
 const children = [
   {
@@ -120,8 +121,15 @@ const children = [
 const WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 const ScheduleScreen = () => {
-  const [selectedChildId, setSelectedChildId] = useState(children[0].id);
-  const selectedChild = children.find((child) => child.id === selectedChildId);
+  const { user } = useAuthStore();
+  const isParent = user?.role === "parent" || (!user && children.length > 0);
+  const isTeacher = user?.role === "teacher";
+  const userChildren = user?.children || children;
+  const userClass = user?.class || "4th year IT engineering SE";
+  const [selectedChildId, setSelectedChildId] = useState(userChildren[0].id);
+  const selectedChild = userChildren.find(
+    (child) => child.id === selectedChildId
+  );
   const schedule = WEEKDAYS.map(
     (day) =>
       selectedChild.schedule.find((d) => d.day === day) || { day, lessons: [] }
@@ -297,11 +305,28 @@ const ScheduleScreen = () => {
       <StatusBar barStyle="light-content" />
       <GeneralHeader title={"Schedule"} showBackArrow={true} />
       <ScrollView contentContainerStyle={styles.container}>
-        <ChildSelector
-          data={children}
-          selectedValue={selectedChildId}
-          onSelect={setSelectedChildId}
-        />
+        {/* Only show ChildSelector if parent with more than one child */}
+        {isParent && userChildren.length > 1 && (
+          <ChildSelector
+            data={userChildren}
+            selectedValue={selectedChildId}
+            onSelect={setSelectedChildId}
+          />
+        )}
+        {/* Show student class section if student or parent */}
+        {!isTeacher && (
+          <View style={{ marginBottom: 10, alignItems: "center" }}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: Colors.primary,
+                fontWeight: "bold",
+              }}
+            >
+              Class: {userClass}
+            </Text>
+          </View>
+        )}
         <DaySelector
           days={WEEKDAYS}
           selectedIdx={selectedDayIdx}
